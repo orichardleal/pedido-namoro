@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amor ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background: #ffd6e7;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hidden { display: none; }
+
+button {
+  padding: 12px 22px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: hotpink;
+  color: white;
+  margin-top: 20px;
+}
+
+#nao {
+  background: gray;
+  position: absolute;
+}
+
+img {
+  width: 80%;
+  max-width: 280px;
+  border-radius: 12px;
+  margin: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TELA 1 -->
+<div id="tela1">
+  <h1>Amor, você me odeia?</h1>
+  <button onclick="mostrarTela(2)">Sim</button>
+  <button id="nao">Não</button>
+</div>
+
+<!-- TELA 2 -->
+<div id="tela2" class="hidden">
+  <h1>EU JÁ DESCONFIAVA 🥹</h1>
+  <p>Mas segue aí enquanto eu choro</p>
+  <button onclick="mostrarTela(3)">Continuar</button>
+</div>
+
+<!-- TELA 3 -->
+<div id="tela3" class="hidden">
+  <p>Em pouco tempo juntos aproveitamos tanto que quase não temos fotos né?</p>
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+  <button onclick="mostrarTela(4)">Continuar ❤️</button>
+</div>
+
+<!-- TELA 4 -->
+<div id="tela4" class="hidden">
+  <h2>Mas pelo menos já temos uma música 🎵</h2>
+
+  <!-- -->
+  <iframe style="border-radius:12px"
+    src="https://open.spotify.com/intl-pt/track/7kwjhB3KqfvjVrQPBawEmq?si=80476fef9a1e42e1"
+    width="300"
+    height="80"
+    frameborder="0"
+    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture">
+  </iframe>
+
+  <button onclick="mostrarTela(5)">Continuar 💫</button>
+</div>
+
+<!-- TELA 5 -->
+<div id="tela5" class="hidden">
+  <div id="frases"></div>
+</div>
+
+<!-- TELA 6 -->
+<div id="tela6" class="hidden">
+  <h2>
+    Meu verão, meu inverno<br>
+    Meu céu, meu inferno<br>
+    Minha namorada
+  </h2>
+  <h1>OPA, MINHA NAMORADA? AH VERDADE 😏</h1>
+  <button onclick="mostrarTela(7)">💍</button>
+</div>
+
+<!-- TELA 7 -->
+<div id="tela7" class="hidden">
+  <h1>Quer namorar comigo? 💍❤️</h1>
+</div>
+
+<script>
+const botaoNao = document.getElementById("nao");
+
+function fugir() {
+  const maxX = window.innerWidth - 120;
+  const maxY = window.innerHeight - 60;
+  botaoNao.style.left = Math.random() * maxX + "px";
+  botaoNao.style.top = Math.random() * maxY + "px";
+}
+
+botaoNao.addEventListener("mouseover", fugir);
+botaoNao.addEventListener("touchstart", fugir);
+
+function mostrarTela(num) {
+  for (let i = 1; i <= 7; i++) {
+    document.getElementById("tela" + i).classList.add("hidden");
+  }
+  document.getElementById("tela" + num).classList.remove("hidden");
+
+  if (num === 5) mostrarFrases();
+}
+
+function mostrarFrases() {
+  const container = document.getElementById("frases");
+  container.innerHTML = "";
+
+  const frases = [
+    "Não sei se eu esqueci que existe ódio Ou se tu me lembrou que existe amor",
+    "Sei que é bom dividir o mesmo copo Saber cada detalhe do seu corpo Torcer pro mesmo time no domingo",
+    "Eu tentei não gostar de você Mas cê me faz gostar mais de mim"
+  ];
+
+  let i = 0;
+
+  function mostrarProxima() {
+    if (i < frases.length) {
+      const p = document.createElement("p");
+      p.innerHTML = frases[i];
+      container.appendChild(p);
+      i++;
+      setTimeout(mostrarProxima, 2000);
+    } else {
+      const btn = document.createElement("button");
+      btn.innerText = "Continuar ❤️";
+      btn.onclick = () => mostrarTela(6);
+      container.appendChild(btn);
+    }
+  }
+
+  mostrarProxima();
+}
+</script>
+
+</body>
+</html>
