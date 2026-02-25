@@ -43,6 +43,40 @@ img {
   border-radius: 12px;
   margin: 10px;
 }
+
+/* ====== NOVO ESTILO TELA 5 ====== */
+
+#tela5 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.balao {
+  position: absolute;
+  bottom: -100px;
+  background: white;
+  color: #ff4d88;
+  padding: 12px 18px;
+  border-radius: 25px;
+  max-width: 70%;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  animation: subir 6s linear forwards;
+}
+
+@keyframes subir {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% { opacity: 1; }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
@@ -90,6 +124,7 @@ img {
 
   <button style="display: block; margin: 20px auto 0;" onclick="mostrarTela(5)">Continuar 💫</button>
 </div>
+
 <!-- TELA 5 -->
 <div id="tela5" class="hidden">
   <div id="frases"></div>
@@ -147,16 +182,23 @@ function mostrarFrases() {
 
   function mostrarProxima() {
     if (i < frases.length) {
-      const p = document.createElement("p");
-      p.innerHTML = frases[i];
-      container.appendChild(p);
+      const balao = document.createElement("div");
+      balao.classList.add("balao");
+      balao.innerText = frases[i];
+
+      balao.style.left = Math.random() * 50 + 10 + "%";
+
+      container.appendChild(balao);
+
       i++;
       setTimeout(mostrarProxima, 2000);
     } else {
-      const btn = document.createElement("button");
-      btn.innerText = "Continuar ❤️";
-      btn.onclick = () => mostrarTela(6);
-      container.appendChild(btn);
+      setTimeout(() => {
+        const btn = document.createElement("button");
+        btn.innerText = "Continuar ❤️";
+        btn.onclick = () => mostrarTela(6);
+        container.appendChild(btn);
+      }, 4000);
     }
   }
 
